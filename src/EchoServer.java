@@ -47,7 +47,7 @@ public class EchoServer {
     }
 
     private void startRead( AsynchronousSocketChannel sockChannel ) {
-        final ByteBuffer buf = ByteBuffer.allocate(2048);
+        final ByteBuffer buf = ByteBuffer.allocate(4096);
 
         //read message from client
         sockChannel.read( buf, sockChannel, new CompletionHandler<Integer, AsynchronousSocketChannel >() {
@@ -57,13 +57,11 @@ public class EchoServer {
              */
             @Override
             public void completed(Integer result, AsynchronousSocketChannel channel  ) {
-                //buf.flip();
-                System.out.println("Message");
-                byte bytes[];// = new byte[2048];
+
+                byte bytes[];
                 bytes = buf.array();
                 Charset cs = Charset.forName("UTF-8");
                 String msg = new String(bytes, cs);
-                System.out.println(msg);
                 buf.clear();
                 StringDecoder sd = new StringDecoder();
                 String messageTest = sd.decodeMessage(msg);
@@ -72,6 +70,11 @@ public class EchoServer {
                     buf.put(messageTest.getBytes());
                     buf.flip();
                     // echo the message
+                    try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     startWrite( channel, buf );
                 }
                 //start to read next message again
