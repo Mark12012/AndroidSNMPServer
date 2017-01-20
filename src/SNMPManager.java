@@ -128,8 +128,8 @@ public class SNMPManager {
 				if (out[2] == null)
 					out[2] = "NO_SUCH_ELEMENT_IN_MAP";
 				out[3] = "" + response.getPeerAddress();
-				System.out.println(pdu);
-				System.out.println(responsePDU);
+				//System.out.println(pdu);
+				//System.out.println(responsePDU);
 			} else {
 				System.out.println("Error: Request Failed");
 				System.out.println("Error Status = " + errorStatus);

@@ -12,10 +12,6 @@ import java.nio.charset.Charset;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Steven Ou
- */
 public class EchoServer {
     public EchoServer( String bindAddr, int bindPort ) throws IOException {
 
@@ -70,11 +66,6 @@ public class EchoServer {
                     buf.put(messageTest.getBytes());
                     buf.flip();
                     // echo the message
-                    try {
-                        Thread.sleep(10);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
                     startWrite( channel, buf );
                 }
                 //start to read next message again
@@ -106,7 +97,7 @@ public class EchoServer {
     }
 
     public static void main( String[] args ) {
-        String defaultIP = "192.168.2.103";
+        String defaultIP = "192.168.43.37";
         int port = 8989;
         System.out.println("Server ip: " + defaultIP + "/" + port);
         try {
